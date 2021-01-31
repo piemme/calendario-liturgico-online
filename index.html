@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Anno liturgico - grafico a torta</title>
+  <script src="https://unpkg.com/d3@6.5.0/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/sunburst-chart@1.11.2/dist/sunburst-chart.min.js"></script>
+  <style type="text/css">
+    html,
+    body,
+    #container {
+      width: 80%;
+      height: 80%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script>
+    // All the JS code for the sunburst chart will come here.
+    const data = {
+      name: "Gesù",
+      text: 'Nostro Signore',
+      color: 'grey',
+      children: [
+        {
+          name: 'Avvento',
+          text: 'Attesa e preparazione in vista della <br/> prossima venuta del signore Gesù',
+          color: 'purple',
+          value: 22,
+          children: [
+          ]
+        },
+        {
+          name: 'Tempo di Natale',
+          text: 'Accogliere il signore Gesù, luce per tutti <br/> le genti, portatore di pace, gioia e amore',
+          color: 'white',
+          value: 19,
+          children: [
+          ]
+        },
+        {
+          name: 'Tempo ordinario',
+          color: 'green',
+          text: 'Ascolto fedele e costante della parola di Dio, <br/> che illumina e guida tutti i credenti',
+          value: 34,
+          children: [
+          ]
+        },
+        {
+          name: 'Quaresima',
+          text: 'Convertite il cuore a Dio e riconciliatevi con i fratelli. <br/> Vivete la penitenza con gioia',
+          value: 40,
+          color: 'purple',
+          children: [
+          ]
+        },
+        {
+          name: "Triduo Pasquale",
+          text: 'Sono i giorni più importanti dell\'anno liturgico <br/> perché ricordiamo il mistero Pasquale',
+          color: 'grey',
+          value: 3,
+          children: [
+          ]
+        },
+        {
+          name: "Tempo di Pasqua",
+          text: 'Fede e speranza in Gesù, signore della vita, <br/> perché con la sua resurrezione ha sconfitto la morte',
+          value: 14,
+          color: 'white',
+          children: [
+          ]
+        },
+        {
+          name: 'Tempo ordinario',
+          text: 'L\'Eucaristia, corpo di Gesù e pane di vita, <br/> il cibo che sostiene il cammino di fede dei Cristiani',
+          value: 120,
+          color: 'green',
+          children: [
+          ]
+        }
+      ]
+    }
+    // const color = d3.scaleOrdinal(d3.schemePaired);
+    Sunburst()
+      .data(data)
+      .color(d => {
+        console.log(d)
+        return d.color
+      })
+      .minSliceAngle(.4)
+      .excludeRoot(false)
+      .maxLevels(6)
+      .showLabels(true)
+      .tooltipContent((d, node) => {
+        console.log('node', node, d)
+        return `<i>${d.text}</i>`
+      })
+      (document.getElementById('container'));
+  </script>
+</body>
+
+</html>
